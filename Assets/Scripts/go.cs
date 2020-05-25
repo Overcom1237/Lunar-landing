@@ -4,6 +4,7 @@ using System;
 
 public class go : MonoBehaviour
 {
+    public GameObject Fi;
     public GameObject pLost;
     public Text text;
     private double speed = 0;
@@ -28,6 +29,7 @@ public class go : MonoBehaviour
 
     public void OnDownUp()
     {
+        Fi.SetActive(true);
         speedt = -0.1;
     }
 
@@ -37,6 +39,7 @@ public class go : MonoBehaviour
     }
     public void Stop()
     {
+        Fi.SetActive(false);
         speedt = 0;
     }
 

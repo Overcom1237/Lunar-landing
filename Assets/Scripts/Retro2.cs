@@ -6,6 +6,7 @@ public class Retro2 : MonoBehaviour
 {
     public Text tex;
     public Text wal;
+    public GameObject Input;
     double h_i, x_i, v_i, u_i, mf_i, ms, a_lim, d_mf, t, ac, g, nf, ls, a, q, v_i1, u_i1;
     public int FlightMode = 1;
     public bool WillReverseOfControl = false;
@@ -53,6 +54,7 @@ public class Retro2 : MonoBehaviour
                     OutInfo();
                     tex.text +=("\n Enter in-flight maneuver");
                     tex.text +=("\n Fuel consumption, kg: ");
+                    Input.SetActive(true);
                     i++;
                 }
                 else
@@ -64,6 +66,7 @@ public class Retro2 : MonoBehaviour
         else if (i == 1)
         {
             d_mf = Convert.ToDouble(wal.text);
+            
             wal.text = "";
             WillQuitProgram = d_mf < 0;
             tex.text +=("\n Time, sec           : ");
@@ -73,6 +76,7 @@ public class Retro2 : MonoBehaviour
         {
             if ((h_i == 0) | ((a < a_lim) & (mf_i != 0)))
             {
+                Input.SetActive(false);
                 t = Convert.ToDouble(wal.text);
                 wal.text = "";
 
@@ -109,10 +113,10 @@ public class Retro2 : MonoBehaviour
     public void OutInfo()
     {
         tex.text =(" -------------------------------------------");
-        tex.text +=("\n Altitude             : " + h_i + " m");
-        tex.text +=("\n Velocity (vertical)  : " + u_i + " m/sec");
-        tex.text +=("\n Fuel                 : " + mf_i + " kg");
-        tex.text +=("\n Life support         : " + ls + " sec");
+        tex.text +=("\n Altitude          : " + String.Format("{0,1:0.0000}", h_i) + " m");
+        tex.text +=("\n Velocity          : " + String.Format("{0,1:0.0000}", u_i) + " m/sec");
+        tex.text +=("\n Fuel              : " + mf_i + " kg");
+        tex.text +=("\n Life support      : " + ls + " sec");
         tex.text +=("\n -------------------------------------------");
     }
     public void CalcAcceleration(bool WillReverseOfControl)
